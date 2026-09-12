@@ -1,8 +1,11 @@
 PASS 1  Standalone paths / dictionary(Done)
 PASS 2  Launch date + puzzle schedule(Done)
 PASS 3  Development helpers + console cleanup(Done)
-PASS 4  Public metadata / favicon / canonical / OG
-PASS 5  Reduced motion + accessibility sanity
+PASS 4  Public metadata / favicon / canonical / OG(Done)
+PASS 5  Reduced motion + accessibility sanity(Done)
 PASS 6  Full gameplay/theme/modal/mobile QA
 PASS 7  Folder cleanup + final production audit
 PASS 8  Main-chat deployment handoff
+
+cloudfaire deploy command: npx wrangler deploy --assets ./ --compatibility-date 2026-09-11
+Cloudfare dev domain: rainbow5.beetle7bailey.workers.dev

@@ -1403,106 +1403,6 @@
     }
 
 
-    @media (max-width: 380px) {
-
-        .board {
-
-            grid-template-columns: repeat(5, 48px);
-
-            grid-template-rows: repeat(6, 48px);
-
-            gap: 6px;
-        }
-
-        .tile {
-
-            width: 48px;
-
-            height: 48px;
-
-            font-size: 24px;
-        }
-
-        .rainbow-history {
-
-            grid-template-rows: repeat(6, 48px);
-
-            gap: 6px;
-        }
-
-        .rainbow-history-row {
-
-            height: 48px;
-
-            gap: 6px;
-        }
-
-        .history-color {
-
-            width: 48px;
-
-            height: 48px;
-        }
-    }
-
-    @media (max-width: 380px) {
-
-        .site-header-inner {
-
-            gap: 4px;
-        }
-
-        .brand-logo {
-
-            width: 24px;
-
-            height: 24px;
-        }
-
-        .game-title {
-
-            font-size: 18px;
-        }
-
-        .title-group {
-
-            gap: 4px;
-        }
-
-        .header-icon-button {
-
-            width: 34px;
-
-            height: 34px;
-
-            padding: 6px;
-        }
-
-        .top-toolbar {
-
-            gap: 0;
-        }
-
-        .key {
-
-            min-width: 22px;
-
-            padding: 0 2px;
-
-            font-size: 11px;
-        }
-
-        .key-wide {
-
-            min-width: 34px;
-        }
-
-        .key-enter {
-
-            width: 100px;
-        }
-    }
-
     /* -------------------------DARK THEME ICONS    ------------------------- */
 
     :root[data-theme="dark"]
@@ -2168,20 +2068,99 @@
         }
     }
 
+    /* Keep both five-column grids together; budget for ten tiles,
+       eight 3px grid gaps, a 2px divider, two 5px gaps and page gutters. */
     @media (max-width: 700px) {
 
         .game-area {
+            --mobile-tile-size: min(34px, calc((100vw - 56px) / 10));
+            --mobile-tile-gap: 3px;
+            flex-direction: row;
+            align-items: stretch;
+            gap: 5px;
+            padding-top: 18px;
+        }
 
-            width: 100%;
+        .board {
+            grid-template-columns: repeat(5, var(--mobile-tile-size));
+            grid-template-rows: repeat(6, var(--mobile-tile-size));
+            gap: var(--mobile-tile-gap);
+        }
 
-            flex-direction: column;
+        .tile,
+        .history-color {
+            width: var(--mobile-tile-size);
+            height: var(--mobile-tile-size);
+        }
 
-            align-items: center;
+        .tile {
+            font-size: 20px;
         }
 
         .board-divider {
+            width: 2px;
+            background: var(--divider-color);
+        }
 
-            display: none;
+        .rainbow-history {
+            grid-template-rows: repeat(6, var(--mobile-tile-size));
+            gap: var(--mobile-tile-gap);
+        }
+
+        .rainbow-history-row {
+            height: var(--mobile-tile-size);
+            gap: var(--mobile-tile-gap);
+        }
+
+        .status-area {
+            height: auto;
+            min-height: 36px;
+        }
+
+        .message {
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+
+        .result-panel {
+            padding: 10px 12px;
+        }
+
+        .keyboard-tools {
+            max-width: 410px;
+            height: 44px;
+            margin-bottom: 4px;
+        }
+
+        .eraser-button {
+            width: 44px;
+            height: 44px;
+        }
+
+        .keyboard {
+            max-width: 410px;
+            gap: 5px;
+        }
+
+        .keyboard-row {
+            gap: 3px;
+        }
+
+        .key {
+            width: calc((100% - 27px) / 10);
+            min-width: 0;
+            height: 44px;
+            padding: 0 2px;
+            font-size: 14px;
+        }
+
+        .key-wide {
+            width: calc((100% - 27px) / 10 + 12px);
+            min-width: 0;
+        }
+
+        .key-enter {
+            width: 130px;
         }
     }
 
@@ -2243,26 +2222,8 @@
             gap: 1px;
         }
 
-        .key {
 
-            min-width: 30px;
 
-            height: 44px;
-
-            padding: 0 5px;
-
-            font-size: 12px;
-        }
-
-        .key-wide {
-
-            min-width: 44px;
-        }
-
-        .key-enter {
-
-            width: 130px;
-        }
     }
 
     @media (max-width: 380px) {
@@ -2303,22 +2264,6 @@
             gap: 0;
         }
 
-        .key {
 
-            min-width: 22px;
 
-            padding: 0 2px;
-
-            font-size: 11px;
-        }
-
-        .key-wide {
-
-            min-width: 34px;
-        }
-
-        .key-enter {
-
-            width: 100px;
-        }
     }
