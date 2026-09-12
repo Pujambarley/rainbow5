@@ -221,9 +221,9 @@ function loadTheme() {
             THEME_STORAGE_KEY
         );
     if (
-        savedTheme === "dark"
+        savedTheme === "light"
     ) {
-        return "dark";
+        return "light";
     }
     return "dark";
 }
@@ -1507,7 +1507,7 @@ async function loadDictionary() {
 
          const response =
             await fetch(
-                    "data/valid_words.txt"
+                    "/data/valid_words.txt"
             );
 
         if (!response.ok) {
@@ -1547,6 +1547,7 @@ async function loadDictionary() {
         validatePuzzleData();
 
         selectDailyPuzzle();
+        openInitialView();
          
 
     } catch (error) {
@@ -1560,6 +1561,21 @@ async function loadDictionary() {
     }
 }
 
+
+/* URL options request an initial view only; normal mode persistence stays unchanged. */
+function openInitialView() {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("mode") === "endless") {
+        selectEndlessPuzzle();
+    } else if (params.get("mode") === "archive") {
+        openArchiveMode();
+    }
+
+    if (params.get("modal") === "howto") {
+        openModal("How to Play", howToPlayPanel);
+    }
+}
 
 /* -------------------------VALIDATE PUZZLE DATA------------------------- */
 
@@ -3447,7 +3463,6 @@ function markKeyboardLettersUsed(
                 document.querySelector(
                     `.key[data-key="${letter}"]`
                 );
-
 
             if (!key) {
                 return;
