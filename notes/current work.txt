@@ -1,0 +1,8 @@
+PASS 1  Standalone paths / dictionary(Done)
+PASS 2  Launch date + puzzle schedule(Done)
+PASS 3  Development helpers + console cleanup(Done)
+PASS 4  Public metadata / favicon / canonical / OG
+PASS 5  Reduced motion + accessibility sanity
+PASS 6  Full gameplay/theme/modal/mobile QA
+PASS 7  Folder cleanup + final production audit
+PASS 8  Main-chat deployment handoff
