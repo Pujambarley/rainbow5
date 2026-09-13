@@ -3591,7 +3591,7 @@ function showPuzzleResult(
     if (won) {
 
         resultTitle.textContent =
-            "Nailed it!";
+            "Solved it!";
 
 
         resultText.textContent =

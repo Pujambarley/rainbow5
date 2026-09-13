@@ -108,7 +108,7 @@
                 <h1>Rainbow5</h1>
             </div>
             <p class="subtitle">A colorful five-letter deduction game.</p>
-            <button class="feedback-button" type="button" disabled>Feedback <span>Coming soon</span></button>
+            <button class="feedback-button" id="feedback-button" type="button" aria-haspopup="dialog" aria-controls="feedback-modal">Feedback</button>
         </header>
 
         <main>
@@ -116,7 +116,7 @@
                 <div class="rainbow-strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
                 <p class="eyebrow">Today's puzzle</p>
                 <h2 id="daily-title">Rainbow5</h2>
-                <p class="daily-description">A new puzzle every day.</p>
+                <p class="daily-description">Test your deduction skills with  new puzzle every day.</p>
                 <a class="play-button" href="/play/">Play today</a>
             </section>
 
@@ -141,7 +141,31 @@
             </nav>
         </main>
 
-        <footer>Rainbow5 <span aria-hidden="true">&middot;</span> New puzzle every day</footer>
+        <footer>Rainbow5 <span aria-hidden="true">&middot;</span> A new puzzle every day</footer>
     </div>
+    <dialog id="feedback-modal" class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
+        <div class="feedback-modal-header">
+            <h2 id="feedback-modal-title">Feedback</h2>
+            <button id="feedback-close" class="feedback-close" type="button" aria-label="Close">&times;</button>
+        </div>
+        <form id="feedback-form" class="feedback-form" method="dialog" novalidate>
+            <p class="feedback-intro"><strong>Thanks for playing Rainbow5!</strong><br>Got an idea, found a bug, or just want to share a thought? I'd love to hear it.</p>
+
+            <label for="feedback-category">What’s this about?</label>
+            <select id="feedback-category" name="category" required autofocus aria-describedby="feedback-status">
+                <option value="gameplay">Gameplay</option>
+                <option value="design">UI / Design</option>
+                <option value="bug">Bug / Problem</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="feedback-text">Feedback</label>
+            <textarea id="feedback-text" name="feedback" rows="5" maxlength="1000" required placeholder="Tell me what you think..." aria-describedby="feedback-counter feedback-status"></textarea>
+            <div id="feedback-counter" class="feedback-counter">0 / 1000</div>
+            <p id="feedback-status" class="feedback-status" role="status" aria-atomic="true"></p>
+            <button class="feedback-send" type="submit">Send Feedback</button>
+        </form>
+    </dialog>
 </body>
 </html>
