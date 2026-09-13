@@ -163,7 +163,7 @@
             <label for="feedback-text">Feedback</label>
             <textarea id="feedback-text" name="feedback" rows="5" maxlength="1000" required placeholder="Tell me what you think..." aria-describedby="feedback-counter feedback-status"></textarea>
             <div id="feedback-counter" class="feedback-counter">0 / 1000</div>
-            <p id="feedback-status" class="feedback-status" role="status" aria-atomic="true"></p>
+            <p id="feedback-status" class="feedback-status" role="status" aria-live="polite" aria-atomic="true"></p>
             <button class="feedback-send" type="submit">Send Feedback</button>
         </form>
     </dialog>

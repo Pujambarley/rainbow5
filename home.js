@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const feedback = document.getElementById("feedback-text");
     const counter = document.getElementById("feedback-counter");
     const status = document.getElementById("feedback-status");
+    const sendButton = form.querySelector('button[type="submit"]');
+    let submitting = false;
 
     function clearStatus() {
         status.textContent = "";
@@ -60,8 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     category.addEventListener("change", clearStatus);
 
-    form.addEventListener("submit", event => {
+    form.addEventListener("submit", async event => {
         event.preventDefault();
+        if (submitting) return;
         clearStatus();
 
         if (!category.value) {
@@ -83,7 +86,32 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Frontend preview only: no submission or draft persistence yet.
-        status.textContent = "Feedback form ready — sending will be connected next.";
+        submitting = true;
+        sendButton.disabled = true;
+        sendButton.textContent = "Sending...";
+
+        try {
+            const response = await fetch("/api/feedback", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    category: category.value,
+                    message: feedback.value.trim()
+                })
+            });
+            if (!response.ok) throw new Error("Feedback request failed");
+            const result = await response.json();
+            if (result?.ok !== true) throw new Error("Feedback request failed");
+
+            feedback.value = "";
+            counter.textContent = "0 / 1000";
+            status.textContent = modal.open ? "Thanks! Your feedback was sent. 🌈" : "";
+        } catch {
+            status.textContent = "Sorry — I couldn't send that right now. Please try again.";
+        } finally {
+            submitting = false;
+            sendButton.textContent = "Send Feedback";
+            sendButton.disabled = false;
+        }
     });
 });
