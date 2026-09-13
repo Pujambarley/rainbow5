@@ -3603,8 +3603,15 @@ function showPuzzleResult(
             "Out of guesses";
 
 
-        resultText.textContent =
-            `Answer: ${ANSWER}`;
+        const answerLabel = document.createElement("span");
+        answerLabel.className = "result-answer-label";
+        answerLabel.textContent = "The answer was";
+
+        const answerWord = document.createElement("strong");
+        answerWord.className = "result-answer";
+        answerWord.textContent = ANSWER;
+
+        resultText.replaceChildren(answerLabel, answerWord);
     }
 
     /*
