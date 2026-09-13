@@ -65,7 +65,7 @@ async function handleFeedback(request, env) {
         return json({ ok: true });
     } catch (error) {
         // Avoid logging the feedback body or private recipient details.
-        console.error("Rainbow5 feedback email send failed.", error?.code || "EMAIL_SEND_FAILED");
+        console.error("Rainbow5 feedback email send failed:", error?.code, error?.message);
         return json({ ok: false, error: "Unable to send feedback right now." }, 500);
     }
 }
