@@ -57,8 +57,8 @@ async function handleFeedback(request, env) {
 
     try {
         await env.FEEDBACK_EMAIL.send({
-            // Omitting `to` uses the binding's single destination_address.
             from: SENDER,
+            to: "rainbow5devfeedback@gmail.com",
             subject: `Rainbow5 Feedback — ${category}`,
             text: `Rainbow5 Feedback\n\nCategory: ${category}\n\nMessage:\n${message}\n\nSource:\nhttps://playrainbow5.com/`
         });
