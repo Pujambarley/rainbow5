@@ -53,14 +53,22 @@ a:focus-visible, button:focus-visible {
 }
 
 .home-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
     padding: 38px 0 28px;
-    text-align: center;
+    text-align: left;
 }
+
+.home-heading { flex: 1 1 360px; min-width: 0; }
+.header-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 
 .brand {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
     
 }
@@ -75,11 +83,12 @@ a:focus-visible, button:focus-visible {
 }
 
 .subtitle {
-    margin: 10px 0 16px;
+    margin: 10px 0 0;
     color: var(--text-secondary);
 }
 
-.feedback-button {
+.feedback-button,
+.theme-button {
     min-height: 36px;
     padding: 5px 12px;
     border: 1px solid var(--border-color);
@@ -91,7 +100,20 @@ a:focus-visible, button:focus-visible {
     cursor: pointer;
 }
 
-.feedback-button:hover { background: var(--hover-bg); }
+.feedback-button:hover,
+.theme-button:hover { background: var(--hover-bg); }
+
+.header-controls button { min-height: 44px; }
+.theme-button { display: grid; place-items: center; width: 44px; padding: 0; }
+.theme-moon { display: none; }
+:root[data-theme="light"] .theme-sun { display: none; }
+:root[data-theme="light"] .theme-moon { display: block; }
+
+@media (max-width: 620px) {
+    .home-header { justify-content: center; text-align: center; }
+    .home-heading { flex-basis: 100%; }
+    .brand { justify-content: center; }
+}
 
 body:has(.feedback-modal[open]) { overflow: hidden; }
 
@@ -241,12 +263,24 @@ body:has(.feedback-modal[open]) { overflow: hidden; }
 .rainbow-strip span:nth-child(5) { background: var(--rainbow-blue); }
 
 .eyebrow {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 10px;
     margin: 0 0 8px;
     color: var(--text-secondary);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+}
+
+.daily-puzzle-number {
+    min-width: 3ch;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: none;
 }
 
 .daily-card h2 {

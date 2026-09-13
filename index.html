@@ -103,18 +103,31 @@
 <body>
     <div class="home-shell">
         <header class="home-header">
-            <div class="brand">
-                <img src="assets/ui/rainbow-logo.png" alt="" width="84" height="84">
-                <h1>Rainbow5</h1>
+            <div class="home-heading">
+                <div class="brand">
+                    <img src="assets/ui/rainbow-logo.png" alt="" width="84" height="84">
+                    <h1>Rainbow5</h1>
+                </div>
+                <p class="subtitle">A colorful five-letter deduction game.</p>
             </div>
-            <p class="subtitle">A colorful five-letter deduction game.</p>
-            <button class="feedback-button" id="feedback-button" type="button" aria-haspopup="dialog" aria-controls="feedback-modal">Feedback</button>
+            <div class="header-controls">
+                <button class="theme-button" id="theme-button" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+                    <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+                    </svg>
+                    <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z" />
+                    </svg>
+                </button>
+                <button class="feedback-button" id="feedback-button" type="button" aria-haspopup="dialog" aria-controls="feedback-modal">Feedback</button>
+            </div>
         </header>
 
         <main>
             <section class="daily-card" aria-labelledby="daily-title">
                 <div class="rainbow-strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                <p class="eyebrow">Today's puzzle</p>
+                <p class="eyebrow">Today's puzzle <span class="daily-puzzle-number" id="daily-puzzle-number"></span></p>
                 <h2 id="daily-title">Rainbow5</h2>
                 <p class="daily-description">Test your deduction skills with  new puzzle every day.</p>
                 <a class="play-button" href="/play/">Play today</a>

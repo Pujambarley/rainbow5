@@ -12,6 +12,42 @@
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
+    const themeButton = document.getElementById("theme-button");
+
+    function updateThemeLabel() {
+        const action = document.documentElement.dataset.theme === "light"
+            ? "Switch to dark mode"
+            : "Switch to light mode";
+        themeButton.setAttribute("aria-label", action);
+        themeButton.title = action;
+    }
+    updateThemeLabel();
+    themeButton.addEventListener("click", () => {
+        const theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+        document.documentElement.dataset.theme = theme;
+        updateThemeLabel();
+        try {
+            localStorage.setItem("rainbow5_theme_v1", theme);
+        } catch {
+            // The theme still changes when browser storage is unavailable.
+        }
+    });
+
+    function updateDailyPuzzleNumber() {
+        const today = new Date();
+        // Match the game's local calendar day, using UTC arithmetic to avoid DST drift.
+        const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+        const dayIndex = Math.floor((todayUTC - Date.UTC(2026, 8, 12)) / 86400000);
+        document.getElementById("daily-puzzle-number").textContent = dayIndex < 0
+            ? "Coming soon"
+            : `#${dayIndex + 1}`;
+    }
+    updateDailyPuzzleNumber();
+    window.addEventListener("pageshow", updateDailyPuzzleNumber);
+    document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) updateDailyPuzzleNumber();
+    });
+
     const button = document.getElementById("feedback-button");
     const modal = document.getElementById("feedback-modal");
     const form = document.getElementById("feedback-form");
