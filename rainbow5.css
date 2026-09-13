@@ -989,6 +989,12 @@
             start center;
     }
 
+    @media (min-width: 701px) {
+        .status-area:has(#share-result-button:not(.hidden)) {
+            height: 168px;
+        }
+    }
+
     .status-area > .message,
     
     .status-area > .result-panel {

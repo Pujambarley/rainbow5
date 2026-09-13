@@ -63,6 +63,10 @@ const resultTitle =
     document.getElementById("result-title");
 const resultText =
     document.getElementById("result-text");
+const shareResultButton =
+    document.getElementById("share-result-button");
+let shareFeedbackTimeout = null;
+let shareInProgress = false;
 const nextPuzzleButton =
     document.getElementById("next-puzzle-button");
 
@@ -430,6 +434,11 @@ playMenu.addEventListener(
 /* -------------------------
    ENDLESS NEXT PUZZLE
 ------------------------- */
+
+shareResultButton.addEventListener(
+    "click",
+    shareDailyResult
+);
 
 nextPuzzleButton.addEventListener(
     "click",
@@ -2656,6 +2665,10 @@ function resetGameBoard() {
         "hidden"
     );
 
+    shareResultButton.classList.add("hidden");
+    clearTimeout(shareFeedbackTimeout);
+    shareResultButton.textContent = "Share Result";
+
     resultTitle.textContent = "";
 
     resultText.textContent = "";
@@ -3476,11 +3489,83 @@ function markKeyboardLettersUsed(
     );
 }
 
+/* -------------------------DAILY SHARE RESULT------------------------- */
+
+function buildDailyShareText() {
+
+    if (
+        gameMode !== "daily" ||
+        !gameOver ||
+        !ANSWER ||
+        currentPuzzleIndex < 0 ||
+        submittedGuesses.length === 0
+    ) {
+        return "";
+    }
+
+    const colors = ["🟥", "🟧", "🟨", "🟩", "🟦"];
+    const rows = submittedGuesses.map(
+        guess => evaluateRainbowGuess(guess, ANSWER)
+            .map((hit, position) => hit ? colors[position] : "⬛")
+            .join("")
+    );
+    const won = submittedGuesses[submittedGuesses.length - 1] === ANSWER;
+    const score = won ? submittedGuesses.length : "X";
+
+    return `Rainbow5 #${currentPuzzleIndex + 1} ${score}/${ROW_COUNT} 🌈\n\n${rows.join("\n")}\n\nplayrainbow5.com`;
+}
+
+async function shareDailyResult() {
+
+    const text = buildDailyShareText();
+
+    if (!text || shareInProgress) {
+        return;
+    }
+
+    shareInProgress = true;
+    clearTimeout(shareFeedbackTimeout);
+    shareResultButton.textContent = "Share Result";
+
+    try {
+        if (typeof navigator.share === "function") {
+            try {
+                await navigator.share({ title: "Rainbow5", text });
+                return;
+            } catch (error) {
+                if (error.name === "AbortError") {
+                    return;
+                }
+            }
+        }
+
+        await navigator.clipboard.writeText(text);
+
+        // A pending share may finish after the player changes modes.
+        if (buildDailyShareText() === text) {
+            shareResultButton.textContent = "Copied!";
+            shareFeedbackTimeout = setTimeout(() => {
+                shareResultButton.textContent = "Share Result";
+            }, 2000);
+        }
+    } catch (error) {
+        shareResultButton.textContent = "Share Result";
+        console.error("Unable to copy Rainbow5 result.", error);
+    } finally {
+        shareInProgress = false;
+    }
+}
+
 /* -------------------------SHOW PUZZLE RESULT------------------------- */
 
 function showPuzzleResult(
     won
 ) {
+
+    shareResultButton.classList.toggle(
+        "hidden",
+        gameMode !== "daily" || !gameOver
+    );
 
     resultPanel.classList.remove(
         "hidden"
