@@ -22,13 +22,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = form.querySelector('button[type="submit"]');
     let submitting = false;
 
+    const categoryValues = {
+        gameplay: "Gameplay",
+        design: "UI / Design",
+        bug: "Bug / Problem",
+        suggestion: "Suggestion",
+        other: "Other"
+    };
+    const allowedCategories = new Set(Object.values(categoryValues));
+    for (const option of category.options) {
+        option.value = categoryValues[option.value] ?? option.value;
+    }
+
+    function updateCounter() {
+        counter.textContent = `${feedback.value.length} / 1000`;
+    }
+    updateCounter();
+    window.addEventListener("pageshow", updateCounter);
+
     function clearStatus() {
         status.textContent = "";
         category.removeAttribute("aria-invalid");
         feedback.removeAttribute("aria-invalid");
     }
 
-    button.addEventListener("click", () => modal.showModal());
+    button.addEventListener("click", () => {
+        updateCounter();
+        modal.showModal();
+    });
     document.getElementById("feedback-close").addEventListener("click", () => modal.close());
 
     // Native dialog handles Escape and keeps keyboard focus inside the modal.
@@ -57,23 +78,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     feedback.addEventListener("input", () => {
-        counter.textContent = `${feedback.value.length} / 1000`;
+        updateCounter();
         clearStatus();
     });
+    feedback.addEventListener("change", updateCounter);
     category.addEventListener("change", clearStatus);
 
     form.addEventListener("submit", async event => {
         event.preventDefault();
         if (submitting) return;
         clearStatus();
+        updateCounter();
+        const selectedCategory = category.value;
+        const trimmedMessage = feedback.value.trim();
 
-        if (!category.value) {
+        if (!allowedCategories.has(selectedCategory)) {
             status.textContent = "Please choose a feedback type.";
             category.setAttribute("aria-invalid", "true");
             category.focus();
             return;
         }
-        if (!feedback.value.trim()) {
+        if (!trimmedMessage) {
             status.textContent = "Please enter some feedback first.";
             feedback.setAttribute("aria-invalid", "true");
             feedback.focus();
@@ -95,8 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    category: category.value,
-                    message: feedback.value.trim()
+                    category: selectedCategory,
+                    message: trimmedMessage
                 })
             });
             if (!response.ok) throw new Error("Feedback request failed");
@@ -104,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (result?.ok !== true) throw new Error("Feedback request failed");
 
             feedback.value = "";
-            counter.textContent = "0 / 1000";
+            updateCounter();
             status.textContent = modal.open ? "Thanks! Your feedback was sent. 🌈" : "";
         } catch {
             status.textContent = "Sorry — I couldn't send that right now. Please try again.";
