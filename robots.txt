@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://playrainbow5.com/sitemap.xml
