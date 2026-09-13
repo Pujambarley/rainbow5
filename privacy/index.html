@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow5 Privacy Policy</title>
+    <meta name="description" content="How Rainbow5 handles saved game progress, feedback, hosting information, and possible future advertising.">
+    <link rel="canonical" href="https://playrainbow5.com/privacy/">
+    <link rel="icon" type="image/png" href="/assets/ui/rainbow-logo.png">
+    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="/privacy/privacy.css">
+    <script>
+        (() => {
+            let theme = "dark";
+            try {
+                if (localStorage.getItem("rainbow5_theme_v1") === "light") theme = "light";
+            } catch {
+                // Keep the default theme when browser storage is unavailable.
+            }
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
+</head>
+<body>
+    <div class="privacy-shell">
+        <header class="privacy-header">
+            <a class="privacy-brand" href="/">
+                <img src="/assets/ui/rainbow-logo.png" alt="" width="40" height="40">
+                <span>Rainbow5</span>
+            </a>
+            <a href="/">Home</a>
+        </header>
+        <main class="privacy-content">
+            <h1>Privacy Policy</h1>
+            <p class="privacy-updated">Last updated: <time datetime="2026-09-13">September 13, 2026</time></p>
+
+            <section aria-labelledby="overview">
+                <h2 id="overview">1. Overview</h2>
+                <p>Rainbow5 is a browser-based word deduction game. This policy explains how information is handled when you play, save your preferences, or send feedback.</p>
+            </section>
+            <section aria-labelledby="device-storage">
+                <h2 id="device-storage">2. Information stored on your device</h2>
+                <p>Rainbow5 uses your browser's LocalStorage to remember:</p>
+                <ul>
+                    <li>Your game progress and completed puzzle state.</li>
+                    <li>Your statistics and streaks.</li>
+                    <li>Your Light/Dark theme preference.</li>
+                </ul>
+                <p>This saved information stays in your browser on your device and is not sent to Rainbow5 as part of saving your progress. Clearing the site's browser data removes it. Your browser may also remove stored data, for example when a private browsing session ends.</p>
+            </section>
+            <section aria-labelledby="feedback">
+                <h2 id="feedback">3. Feedback</h2>
+                <p>When you submit the Feedback form, your selected category and feedback message are sent through Rainbow5's Cloudflare Worker and delivered to the Rainbow5 feedback email inbox so we can review them.</p>
+                <p>The form does not ask for your name or email address. If you voluntarily include personal information in your message, it will be included in the feedback we receive. Please avoid sending sensitive information. The infrastructure handling the request may also process technical request information, as described below.</p>
+            </section>
+            <section aria-labelledby="hosting">
+                <h2 id="hosting">4. Hosting and technical information</h2>
+                <p>Rainbow5 is hosted through Cloudflare. Cloudflare may process network and request information, such as IP addresses and traffic routing data, to deliver and secure the site. See <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's Privacy Policy</a> for more information.</p>
+            </section>
+            <section aria-labelledby="advertising">
+                <h2 id="advertising">5. Advertising</h2>
+                <p>Google AdSense is not currently active on Rainbow5. In the future, Rainbow5 may use Google AdSense or another advertising provider.</p>
+                <p>Advertising providers may use cookies or similar technologies to deliver ads, measure ad performance, and personalize ads where permitted. Additional consent controls may be shown where legally required. This policy will be updated when advertising services are introduced.</p>
+            </section>
+            <section aria-labelledby="cookies">
+                <h2 id="cookies">6. Cookies</h2>
+                <p>Rainbow5 itself currently relies primarily on LocalStorage for game state and preferences. Third-party services, including future advertising services, may use cookies or similar technologies. You can manage cookies and site storage through your browser settings; clearing site storage also removes saved game progress and preferences.</p>
+            </section>
+            <section aria-labelledby="third-parties">
+                <h2 id="third-parties">7. Third-party services</h2>
+                <p>Rainbow5 currently uses Cloudflare for hosting and handling feedback requests. Google AdSense is a possible future advertising provider, not a current integration. Google explains its advertising technologies in <a href="https://policies.google.com/technologies/ads">its advertising information</a> and <a href="https://policies.google.com/technologies/cookies">cookie information</a>.</p>
+            </section>
+            <section aria-labelledby="children">
+                <h2 id="children">8. Children's privacy</h2>
+                <p>Rainbow5 is a general-audience puzzle game and is not designed to knowingly collect personal information from children. If you believe a child has shared personal information through feedback, please contact us.</p>
+            </section>
+            <section aria-labelledby="changes">
+                <h2 id="changes">9. Changes to this policy</h2>
+                <p>We may update this policy when Rainbow5's features or services change. The date at the top of this page shows when it was last updated.</p>
+            </section>
+            <section aria-labelledby="contact">
+                <h2 id="contact">10. Contact</h2>
+                <p>For privacy questions, contact <a href="mailto:feedback@playrainbow5.com">feedback@playrainbow5.com</a>.</p>
+            </section>
+        </main>
+        <footer>Rainbow5 <span aria-hidden="true">&middot;</span> <a href="/">Home</a></footer>
+    </div>
+</body>
+</html>
