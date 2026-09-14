@@ -174,7 +174,6 @@ const PUZZLES = [
     { answer: "FREAK" },
     { answer: "QUEST" },
     { answer: "JOINT" },
-    { answer: "JAUNT" },
     { answer: "MAYOR" },
     { answer: "PLAID" },
     { answer: "CHINA" },
@@ -225,7 +224,6 @@ const PUZZLES = [
     { answer: "FLASH" },
     { answer: "ARGUE" },
     { answer: "EARTH" },
-    { answer: "HOTLY" },
     { answer: "THROW" },
     { answer: "STARE" },
     { answer: "WORST" },
@@ -283,9 +281,10 @@ const PUZZLES = [
     { answer: "MEDAL" },
     { answer: "AGENT" },
     { answer: "MONEY" },
+    { answer: "QUAKE" },
  
 
-    
+
   
     { answer: "BEACH" },
     { answer: "BLACK" },
