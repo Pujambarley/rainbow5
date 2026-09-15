@@ -720,7 +720,11 @@
 
         font-weight: bold;
 
-        font-family: fantasy;
+        font-family: 
+            "Segoe Print",
+            "MV Boli",
+            "Comic Sans MS",
+            cursive;
 
         text-align: center;
 
