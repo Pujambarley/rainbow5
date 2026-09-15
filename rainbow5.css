@@ -2116,6 +2116,33 @@
        eight 3px grid gaps, a 2px divider, two 5px gaps and page gutters. */
     @media (max-width: 700px) {
 
+        /* Visible Archive navigation gets its own row; other modes stay unchanged. */
+        .site-header-inner:has(.archive-date-nav:not(.hidden)) {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            row-gap: 6px;
+        }
+
+        .archive-date-nav:not(.hidden) {
+            position: static;
+            left: auto;
+            top: auto;
+            transform: none;
+            grid-column: 1 / -1;
+            grid-row: 2;
+            width: 100%;
+            justify-content: center;
+            gap: 12px;
+            padding-top: 6px;
+            border-top: 1px solid var(--soft-border-color);
+        }
+
+        .archive-date-nav:not(.hidden) .archive-date-button {
+            flex: 0 0 44px;
+            width: 44px;
+            height: 44px;
+        }
+
         .game-area {
             --mobile-tile-size: min(34px, calc((100vw - 56px) / 10));
             --mobile-tile-gap: 3px;
